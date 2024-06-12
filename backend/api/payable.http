@@ -1,0 +1,70 @@
+@baseUrl = http://localhost:8080
+@token = {{tokenAPI.response.body.token}}
+
+### Auth helper
+# @name tokenAPI
+POST {{baseUrl}}/integrations/auth
+Content-Type: application/json
+
+{
+    "login": "aprovame",
+    "password": "aprovame"
+}
+
+### Create a new payable
+POST {{baseUrl}}/integrations/payable
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "value": 620.93,
+    "assignorId": "c49b4bef-ab2a-48dd-990e-af3c2e1e7c08",
+    "emissionDate": "2024-08-01"
+}
+
+### Get all payables
+GET {{baseUrl}}/integrations/payable
+Authorization: Bearer {{token}}
+
+### Get payable by id
+GET {{baseUrl}}/integrations/payable/9a888b65-fe9a-472b-9f30-bc8fa7c3e118
+Authorization: Bearer {{token}}
+
+### Update payable by id
+PATCH {{baseUrl}}/integrations/payable/9a888b65-fe9a-472b-9f30-bc8fa7c3e118
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "value": 620.93,
+    "assignorId": "bd0695f9-7b5a-4518-b436-810bc75fb718"
+}
+
+### Delete payable by id
+DELETE {{baseUrl}}/integrations/payable/9a888b65-fe9a-472b-9f30-bc8fa7c3e118
+Authorization: Bearer {{token}}
+
+### Batch create payables
+POST {{baseUrl}}/integrations/payable/batch
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "payables": [
+        {
+            "value": 620.93,
+            "assignorId": "c49b4bef-ab2a-48dd-990e-af3c2e1e7c08",
+            "emissionDate": "2024-08-01"
+        },
+        {
+            "value": 620.93,
+            "assignorId": "c49b4bef-ab2a-48dd-990e-af3c2e1e7c08",
+            "emissionDate": "2024-08-01"
+        },
+        {
+            "value": 620.93,
+            "assignorId": "c49b4bef-ab2a-48dd-990e-af3c2e1e7c08",
+            "emissionDate": "2024-08-01"
+        }
+    ]
+}

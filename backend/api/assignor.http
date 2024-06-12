@@ -1,0 +1,45 @@
+@baseUrl = http://localhost:8080
+@token = {{tokenAPI.response.body.token}}
+
+### Auth helper
+# @name tokenAPI
+POST {{baseUrl}}/integrations/auth
+Content-Type: application/json
+
+{
+    "login": "aprovame",
+    "password": "aprovame"
+}
+
+### Create a new assignor
+POST {{baseUrl}}/integrations/assignor
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "document": "123.456.789-00",
+    "email": "joao@mail.com",
+    "phone": "99 99999-9999",
+    "name": "João da Silva"
+}
+
+### Read all assignors
+GET {{baseUrl}}/integrations/assignor
+Authorization: Bearer {{token}}
+
+### Read one assignor
+GET {{baseUrl}}/integrations/assignor/00e44aec-4fd6-43d0-b151-625e429ff995
+Authorization: Bearer {{token}}
+
+### Update an assignor 
+PATCH {{baseUrl}}/integrations/assignor/0f23f87f-d760-4169-8df0-02d8af8d2215
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "email": "joao.silva@mail.com"
+}
+
+### Delete an assignor
+DELETE {{baseUrl}}/integrations/assignor/0f23f87f-d760-4169-8df0-02d8af8d2215
+Authorization: Bearer {{token}}
